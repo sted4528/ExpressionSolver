@@ -6,8 +6,8 @@ class Parser:
 
         expression = line.replace(" ", "")  # удаляем все пробелы в строке
 
-        monos = []  # создаем список для хранения результатов
-        monos1 = []
+        monomials_left = []  # создаем список для хранения результатов
+        monomials_right = []
         is_equal_find = False
         while len(expression) != 0:  # при помощи цикла получаем число, переменную, степень и оставшуюся строку
 
@@ -17,11 +17,11 @@ class Parser:
 
             factor, variable, exp, expression = Parser.__parse_mono__(expression)
             if is_equal_find:
-                monos1.append((-factor, variable, exp))
+                monomials_right.append((-factor, variable, exp))
             else:
-                monos.append((factor, variable, exp))  # добавляем число, переменную, степень в список в виде кортежа
+                monomials_left.append((factor, variable, exp))  # добавляем число, переменную, степень в список в виде кортежа
 
-        return monos, monos1
+        return monomials_left, monomials_right
 
     @staticmethod
     def equal_find(line: str):  # ищем равно чтобы отделить левую часть от правой
