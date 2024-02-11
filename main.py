@@ -8,6 +8,6 @@ from Entitys.Parser import Parser
 #
 # print(Expression([3, -3, 0]).solve())
 # print(Expression([2, 4, 5, 10]).solve())
-print(Expression([1, 0, -5, 0, -36, 0]).solve()) #  Д == 0, 2 корень
-print(Expression([1, 0, -5, 0, 6, 0]).solve()) #  Д > 0, 4 корня
-print(Expression([1, 0, 0, 0, 10, 0]).solve()) #  Д < 0, 0 корней
+print(Expression([1, 0, -5, 0, -36, 0]).solve())  # Д == 0, 2 корень
+print(Expression([1, 0, -5, 0, 6, 0]).solve())  # Д > 0, 4 корня
+print(Expression([1, 0, 0, 0, 10, 0]).solve())  # Д < 0, 0 корней
