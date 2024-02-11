@@ -1,5 +1,6 @@
 from math import sqrt
 
+from Solvers.QuadSolver import QuadSolver
 from Solvers.Solver import Solver
 
 
@@ -13,23 +14,14 @@ class BiQuadSolver(Solver):
         self.d = args[5]
 
     def solve(self) -> list:
-        a = self.a
-        b = self.b
-        c = self.c - self.d
-        discriminant = b ** 2 - 4 * a * c
-        if discriminant < 0:
+        roots = QuadSolver.solve(self)
+        if len(roots) == 2:
+            root1_positive = sqrt(roots[0]) if roots[0] > 0 else []
+            root1_negative = -sqrt(roots[0]) if roots[0] > 0 else []
+            root2_positive = sqrt(roots[1]) if roots[1] > 0 else []
+            root2_negative = -sqrt(roots[1]) if roots[1] > 0 else []
+            return [root1_positive, root1_negative, root2_positive, root2_negative]
+        if len(roots) == 1:
+            return [sqrt(roots[0])]
+        if len(roots) == 0:
             return []
-        elif discriminant == 0:
-            return [sqrt(-b / (2 * a))]
-        elif discriminant > 0:
-            root1 = (-b + sqrt(discriminant)) / (2 * a)
-            if root1 > 0:
-                new_root1 = sqrt(root1)
-            else:
-                new_root1 = 'Меньше нуля'
-            root2 = (-b - sqrt(discriminant)) / (2 * a)
-            if root2 > 0:
-                new_root2 = sqrt(root2)
-            else:
-                new_root2 = 'Меньше нуля'
-            return [new_root1, -new_root1, new_root2, -new_root2]
