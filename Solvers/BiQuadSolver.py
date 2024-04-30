@@ -23,6 +23,6 @@ class BiQuadSolver(Solver):
             root2_negative = -cmath.sqrt(roots[1])
             return [root1_positive, root1_negative, root2_positive, root2_negative]
         if len(roots) == 1:
-            return [sqrt(roots[0])]
+            return [cmath.sqrt(roots[0]),-cmath.sqrt(roots[0])]
         if len(roots) == 0:
             return []
