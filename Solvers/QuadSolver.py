@@ -21,4 +21,4 @@ class QuadSolver(Solver):
         elif discriminant == 0:
             return [-b / (2 * a)]
         elif discriminant > 0:
-            return [(-b + sqrt(discriminant)) / (2 * a), (-b - sqrt(discriminant)) / (2 * a)]
+            return [(-b + cmath.sqrt(discriminant)) / (2 * a), (-b - cmath.sqrt(discriminant)) / (2 * a)]

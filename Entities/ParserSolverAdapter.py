@@ -17,7 +17,10 @@ def solving(expression: str):
             if j[2] == 0:
                 non_x += j[0]
     if x4 == 0:
-        coefficient_list = [x2, x, non_x, 0]
+        if x2 != 0:
+            coefficient_list = [x2, x, non_x, 0]
+        if x2 == 0:
+            coefficient_list = [x, non_x, 0]
     else:
         coefficient_list = [x4, 0, x2, 0, non_x, 0]
     result_solving = Expression(coefficient_list).solve()
