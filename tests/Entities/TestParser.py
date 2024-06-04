@@ -1,4 +1,3 @@
-import pytest
 from Entities.Parser import Parser
 
 
