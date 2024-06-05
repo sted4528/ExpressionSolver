@@ -9,11 +9,21 @@ class TestParser:
         # assert
         assert True
 
-    def test_one_token_linear_negative(self):
+    def test_one_token_linear_negative_no_number(self):
         # arrange
         expression_str = "-x = 0"
         sut = Parser
         truth = [(-1.0, 'x', 1.0)], []
+        # act
+        result = sut.parse_expression(expression_str)
+        # assert
+        assert result == truth
+
+    def test_one_token_linear_negative_number(self):
+        # arrange
+        expression_str = "-3x = 0"
+        sut = Parser
+        truth = [(-3.0, 'x', 1.0)], []
         # act
         result = sut.parse_expression(expression_str)
         # assert
@@ -59,7 +69,6 @@ class TestParser:
         # assert
         assert result == truth
 
-    # TODO: Exception!!!
     def test_two_token_quad_end_linear_right_linear(self):
         # arrange
         expression_str = "x2 + 15x = -3x"

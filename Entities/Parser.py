@@ -4,12 +4,13 @@ from Entities.Expression import Expression
 class Parser:
     # "-3.1415x"
     # "3x^2 - 10x + 5 = 10"
+    # ([(3,'x',2), (-10,x,1), (5,'',0)], [])
 
     @staticmethod
     def parse_expression(line: str):  # expression - выражение
 
         expression = line.replace(" ", "")  # удаляем все пробелы в строке
-
+        # TODO: Сделать картежь списков
         monomials_left = []  # создаем список для хранения результатов
         monomials_right = []
         is_equal_find = False
@@ -20,10 +21,11 @@ class Parser:
                 is_equal_find = True
 
             factor, variable, exp, expression = Parser.__parse_mono__(expression)
-            if is_equal_find:
-                monomials_right.append((-factor, variable, exp))
-            else:
-                monomials_left.append((factor, variable, exp))  # добавляем число,переменную,степень в список кортежем
+            if factor != 0:
+                if is_equal_find:
+                    monomials_right.append((factor, variable, exp))
+                else:
+                    monomials_left.append((factor, variable, exp))  # добавляем число,переменную,степень в список кортежем
         return monomials_left, monomials_right
 
     @staticmethod
@@ -76,6 +78,8 @@ class Parser:
     def __parse_exponent__(line: str) -> (float, str):
 
         cur_pos: int = 0
+        if len(line) == 0:
+            return 1, ""
         if line[0] == '^':
             cur_pos += 1
         elif line[0] != '^' and not line[0].isdigit():
@@ -99,7 +103,7 @@ class Parser:
             cur_pos += 1
 
         if not line[cur_pos].isdigit():
-            return 1, line[cur_pos:]
+            return (1, line[cur_pos:]) if number_str != '-' else (-1, line[cur_pos:])
 
         # "-31.1415"
         #   ^^
